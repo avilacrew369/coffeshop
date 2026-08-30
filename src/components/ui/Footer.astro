@@ -1,0 +1,29 @@
+---
+import FooterBox from './FooterBox.astro';
+---
+
+<footer class="bg-coffee-900 pt-20">
+    <div class="max-w-7xl mx-auto mt-10 grid grid-cols-1 lg:grid-cols-3 gap-5">
+    
+      <FooterBox heading="Ubicaion">
+            <p>Digital Way 69</p>
+            <p>Cancun. Q. Roo</p>
+
+      </FooterBox>
+       <FooterBox heading="Reservaciones">
+          <p>Tel. +52 9845923956</p>
+          <a href="tel:+9845923956">Llamar</a>
+       </FooterBox>
+
+    
+     <FooterBox heading="Horario">
+         <p>Horario de atención: 9:00</p>
+            <p>a 17:00</p>
+
+     </FooterBox>
+          
+    
+    </div>
+      <p class=" text-blue-400 text-center text-2xl py-4">&copy; {new Date().getFullYear()} The Panther Coffee Roasters. All rights reserved.</p>
+</footer>
+  
