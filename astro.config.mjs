@@ -6,5 +6,16 @@ import tailwindcss from '@tailwindcss/vite'
 export default defineConfig({
     vite: {
         plugins: [tailwindcss()]
-    }
+    },
+    image: {
+        domains: ['coffeshop.local'],
+        remotePatterns: [
+            {
+                protocol: 'http',
+                hostname: 'coffeshop.local',
+                pathname: '/wp-content/uploads/**'
+            }
+        ]
+    },
+
 });
