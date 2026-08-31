@@ -38,3 +38,19 @@ export const ProcessPageSchema = BaseWPSchemas.extend({
         subtitle: z.string(),
     }).catchall(processSchema)
 })
+const CategorySchema = z.object({
+    name: z.string(),
+    slug: z.string()
+})
+
+const CategoriesSchema = z.array(CategorySchema)
+
+export const PostSchema = BaseWPSchemas.omit({
+    acf: true
+}).extend({
+    date: z.string(),
+    category_details: CategoriesSchema
+})
+export const PostsSchema = z.array(PostSchema)
+
+export type Post = z.infer<typeof PostSchema>
