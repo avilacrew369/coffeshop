@@ -27,21 +27,33 @@ export const BaseWPSchemas =  z.object({
     })
 })
 
+const gallerySchema = z.object({
+    large: imageSchema,
+    full: imageSchema,
+})
+
+export const GalleryPageSchema = BaseWPSchemas.extend({
+    gallery: z.array(gallerySchema)
+})
 const processSchema = z.object({
     title: z.string(),
     description: z.string(),
     image: z.string(),
 })
-
 export const ProcessPageSchema = BaseWPSchemas.extend({ 
     acf: z.object({ 
         subtitle: z.string(),
     }).catchall(processSchema)
 })
-const CategorySchema = z.object({
+export const CategorySchema = z.object({
+    id: z.number(),
     name: z.string(),
     slug: z.string()
 })
+export const CategoriesSlugSchema =  z.array(CategorySchema.pick({
+    slug: true
+}))
+
 
 const CategoriesSchema = z.array(CategorySchema)
 
@@ -54,3 +66,5 @@ export const PostSchema = BaseWPSchemas.omit({
 export const PostsSchema = z.array(PostSchema)
 
 export type Post = z.infer<typeof PostSchema>
+
+export type Gallery = z.infer<typeof gallerySchema>
