@@ -12,13 +12,20 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/netlify": "^8.2.5",
     "@tailwindcss/vite": "^4.3.3",
     "astro": "^7.2.9",
+    "leaflet": "^1.9.4",
+    "notyf": "^3.10.0",
     "photoswipe": "^5.4.4",
     "sharp": "^0.35.4",
     "tailwindcss": "^4.3.3"
   },
   "allowScripts": {
-    "esbuild": true
+    "esbuild": true,
+    "fsevents@2.3.3": true
+  },
+  "devDependencies": {
+    "@types/leaflet": "^1.9.22"
   }
 }

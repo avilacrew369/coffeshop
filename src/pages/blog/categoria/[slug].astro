@@ -6,13 +6,11 @@ export async function  getStaticPaths () {
     const rest = await fetch(`${import.meta.env.API_URL}/categories?_fields=slug`);
     const json = await rest.json();
     const categogories = CategoriesSlugSchema.parse(json);
-    console.log(categogories)
     return categogories.map(category => ({
         params: {
             slug: category.slug
         }
     }))
-    console.log(categogories)
     
 }
 
@@ -27,7 +25,6 @@ const postsRes = await fetch(postsUrl)
 const postsJson = await postsRes.json()
 const posts = PostsSchema.parse(postsJson)
 
-console.log(category.name)
 ---
 
 <Layout

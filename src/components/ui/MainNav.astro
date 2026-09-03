@@ -8,12 +8,19 @@ const navigation = [
   {name: 'Galería', href: '/galeria/' },
   {name: 'Contacto', href: '/contacto/' },
 ]
+const currentPath = Astro.url.pathname
+const isActive = (href : string) => {
+    if(href === '/') return currentPath === '/'
+    return currentPath.startsWith(href)
+}
+
 ---
 
 <nav class="flex flex-col lg:flex-row  justify-center items-center gap-4">
-    {navigation.map(item => 
-    <a 
-        href={item.href}
-        class="uppercase text-lg font-bold text-white hover:text-white/70 transition-colors duration-300"
-        >{item.name}</a>)}
+   {navigation.map(item => 
+        <a
+            href={item.href}
+            class={`${isActive(item.href) ? 'text-coffee-400' : 'text-white hover:text-coffee-400'} uppercase text-lg font-bold `}
+        >{item.name}</a>
+  )}
 </nav>

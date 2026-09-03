@@ -1,4 +1,6 @@
-import { z } from 'astro/zod'
+import * as z from 'zod'
+
+
 
 const imageSchema = z.object({
     url: z.string(),
@@ -65,6 +67,44 @@ export const PostSchema = BaseWPSchemas.omit({
 })
 export const PostsSchema = z.array(PostSchema)
 
+const MenuItemSchema = BaseWPSchemas.pick({
+    title: true,
+    featured_images: true
+}).extend({
+    acf: z.object({
+        description: z.string(),
+        price: z.coerce.number(),
+    })
+})
+
+export const MenuItemsSchema = z.array(MenuItemSchema)
+
+const MarkerSchema = z.object({
+    label: z.string(),
+    lat: z.number(),
+    lng: z.number()
+})
+
+const LocationSchema = z.object({
+    lat: z.number(),
+    lng: z.number(),
+    zoom: z.number(),
+    markers: z.array(MarkerSchema)
+})
+
+export const ContactPageSchema = BaseWPSchemas.extend({
+    acf: z.object({
+        subtitle: z.string()
+    }).catchall(LocationSchema)
+})
+
+
 export type Post = z.infer<typeof PostSchema>
 
 export type Gallery = z.infer<typeof gallerySchema>
+
+export type FeatureImages = z.infer<typeof featuredImagesSchema>
+
+export type Location = z.infer<typeof  LocationSchema>
+
+
