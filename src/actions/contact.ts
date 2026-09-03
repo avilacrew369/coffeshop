@@ -24,8 +24,11 @@ export const contact = {
                 z.string().min(10, {message: 'El mensaje no puede ir vacio'})
              ),
         }),
-          handler: async (input) => {
-             const url = `${import.meta.env}/wp-json/contact-form-7/v1/contact-forms/190/feedback`
+             handler: async (input) => {
+                 const url = new URL(
+                     '/wp-json/contact-form-7/v1/contact-forms/190/feedback',
+                     import.meta.env.HOME_URL
+                 )
 
             const formData = new FormData()
             formData.append('your-name', input.name)
