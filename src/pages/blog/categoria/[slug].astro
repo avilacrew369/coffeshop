@@ -1,8 +1,10 @@
 ---
+export const prerender = false;
 import PostCard from "@/components/blog/PostCard.astro";
 import Layout from "@/layouts/Layout.astro";
 import { CategoriesSlugSchema, CategorySchema, PostsSchema } from "@/types";
-export async function  getStaticPaths () {
+
+export async function getStaticPaths () {
     const rest = await fetch(`${import.meta.env.API_URL}/categories?_fields=slug`);
     const json = await rest.json();
     const categogories = CategoriesSlugSchema.parse(json);
@@ -10,24 +12,21 @@ export async function  getStaticPaths () {
         params: {
             slug: category.slug
         }
-    }))
-    
+    }));
 }
 
-const { slug } = Astro.params
-const catUrl =`${import.meta.env.API_URL}/categories?slug=${slug}`
+const { slug } = Astro.params;
+const catUrl = `${import.meta.env.API_URL}/categories?slug=${slug}`;
 const catRes = await fetch(catUrl);
 const catJson = await catRes.json();
 const category = CategorySchema.parse(catJson[0]);
 
-const postsUrl = `http://coffeshop.local/wp-json/wp/v2/posts?categories=${category.id}`
-const postsRes = await fetch(postsUrl)
-const postsJson = await postsRes.json()
-const posts = PostsSchema.parse(postsJson)
+const postsUrl = `http://coffeshop.local/wp-json/wp/v2/posts?categories=${category.id}`;
+const postsRes = await fetch(postsUrl);
+const postsJson = await postsRes.json();
+const posts = PostsSchema.parse(postsJson);
 
 ---
-
-
 <Layout
     title={`Posts en la categoria: ${category.name}`}
     subtitle={`Posts en: ${category.name}`}

@@ -15,3 +15,5 @@
     }
   }
 }
+
+API_URL=https://panthercoffee.panther-black-dev.me/wp-json/wp/v2
